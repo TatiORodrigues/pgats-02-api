@@ -10,7 +10,7 @@ const userService = require('../../../service/userService');
 // Aplicação
 let app;
 let request;
-const appPromise = require('../../../graphql/appG');
+const appPromise = require('../../../graphql/app');
 before(async () => {
     app = await appPromise;
     request = supertest(app);

@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const { expect } = require('chai');
 
 // Aplicação
-const app = require('../../../appR');
+const app = require('../../../app');
 
 // Mock
 const userService = require('../../../service/userService');
