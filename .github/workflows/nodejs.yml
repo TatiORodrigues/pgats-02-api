@@ -44,9 +44,12 @@ jobs:
         done
 
     - name: Criar .env
+      env:
+        BASE_URL_REST: ${{ secrets.BASE_URL_REST }}
+        BASE_URL_GRAPHQL: ${{ secrets.BASE_URL_GRAPHQL }}
       run: |
-        echo "BASE_URL_REST=${{ secrets.BASE_URL_REST }}" >> .env
-        echo "BASE_URL_GRAPHQL=${{ secrets.BASE_URL_GRAPHQL }}" >> .env
+        echo "BASE_URL_REST=$BASE_URL_REST" >> .env
+        echo "BASE_URL_GRAPHQL=$BASE_URL_GRAPHQL" >> .env
 
     - name: Rodar os testes de API REST via HTTP
       run: npm run test-rest-external
