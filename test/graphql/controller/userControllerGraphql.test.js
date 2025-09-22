@@ -17,16 +17,14 @@ before(async () => {
 });
 
 //Testes
-
-describe('Testes GraphQL API - Users', () => {
-
-    // Variável para armazenar dados do usuário entre os testes
+ // Variável para armazenar dados do usuário entre os testes
     const testUser = {
         username: `tester_${Date.now()}`, // Garante um username único a cada execução
         password: 'password123',
         favorecidos: ['fav1', 'fav2']
     };
-
+    
+describe('Testes GraphQL API - Users', () => {
     //================================================
     //==> Testes para a Mutation: registerUser
     //================================================

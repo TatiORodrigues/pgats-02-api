@@ -16,11 +16,11 @@ const server = new ApolloServer({
   context: ({ req }) => authenticate(req)
 });
 
+
 async function startApolloServer() {
   await server.start();
-  server.applyMiddleware({ app, path: '/graphql' }); // garante o path
+  server.applyMiddleware({ app, path: '/graphql' });
+  return app;
 }
 
-const apolloReady = startApolloServer().then(() => app);
-
-module.exports = apolloReady;
+module.exports = startApolloServer();

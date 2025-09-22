@@ -85,7 +85,8 @@ describe('Testes de Transferência', () => {
                 .send(teste.createTransfer);
 
             expect(respostaTransferencia.status).to.equal(200);
-            console.log(respostaSaldoInsuficiente.body.errors[0].message);
+            expect(respostaTransferencia.body.errors[0].message).to.equal(teste.mensagemEsperada);
+            console.log(respostaTransferencia.body.errors[0].message);
         });
     });
 

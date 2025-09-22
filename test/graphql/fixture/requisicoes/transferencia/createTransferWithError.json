@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-[]
-=======
 [
     {
         "nomeDoTeste": "Saldo insuficiente",
@@ -25,8 +22,7 @@
             }
         },
         "mensagemEsperada": "Usuário remetente ou destinatário não encontrado"
-    }
-    ,
+    },
     {
         "nomeDoTeste": "Destinatário não encontrado",
         "createTransfer": {
@@ -40,4 +36,3 @@
         "mensagemEsperada": "Usuário remetente ou destinatário não encontrado"
     }
 ]
->>>>>>> dde90333377f907d7154e11425d6ec419eb64c03
