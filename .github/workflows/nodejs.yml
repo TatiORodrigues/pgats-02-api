@@ -22,37 +22,23 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Rodar os testes de API via Controller
-      run: npm run test-rest-controller
-
-    - name: Subir API REST
-      run: npm start-rest &
-
-    - name: Subir API GraphQL
-      run: npm start-graphql &
-
-    - name: Esperar REST estar pronto
+    - name: Start services and run tests
       run: |
-        for i in {1..10}; do
-          curl -sSf $BASE_URL_REST/health && break || sleep 2
-        done
-
-    - name: Esperar GraphQL estar pronto
-      run: |
-        for i in {1..10}; do
-          curl -sSf $BASE_URL_GRAPHQL/graphql && break || sleep 2
-        done
-
-    - name: Criar .env
-      env:
-        BASE_URL_REST: ${{ secrets.BASE_URL_REST }}
-        BASE_URL_GRAPHQL: ${{ secrets.BASE_URL_GRAPHQL }}
-      run: |
-        echo "BASE_URL_REST=$BASE_URL_REST" >> .env
-        echo "BASE_URL_GRAPHQL=$BASE_URL_GRAPHQL" >> .env
-
-    - name: Rodar os testes de API REST via HTTP
-      run: npm run test-rest-external
-
-    - name: Rodar os testes de API GraphQL via HTTP
-      run: npm run test-graphql-external
+        # Inicia a API REST em background
+        npm start-rest &
+        
+        # Inicia a API GraphQL em background
+        npm start-graphql &
+        
+        # Espera as APIs estarem prontas
+        sleep 5
+        
+        # Configura as variáveis de ambiente localmente
+        export BASE_URL_REST="http://localhost:3000"
+        export BASE_URL_GRAPHQL="http://localhost:4000/graphql"
+        
+        # Executa os testes de API REST
+        npm run test-rest-external
+        
+        # Executa os testes de API GraphQL
+        npm run test-graphql-external
