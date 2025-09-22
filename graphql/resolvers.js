@@ -13,7 +13,9 @@ module.exports = {
   },
   Mutation: {
     registerUser: (parent, { username, password, favorecidos }) => {
-      return userService.registerUser({ username, password, favorecidos });
+      const user = userService.registerUser({ username, password, favorecidos });
+      if (!user) throw new Error('Usuário já existe');
+      return user;
     },
     loginUser: (parent, { username, password }) => {
       const user = userService.loginUser({ username, password });
