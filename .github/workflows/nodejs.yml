@@ -33,12 +33,20 @@ jobs:
     - name: Subir API REST
       run: |
         nohup npm run start-rest &
-        npx wait-on $BASE_URL_REST/health
+        for i in {1..10}; do
+          curl -sSf http://127.0.0.1:3000/health && break
+          echo "Aguardando API REST subir..."
+          sleep 2
+        done
 
     - name: Subir API GraphQL
       run: |
         nohup npm run start-graphql &
-        npx wait-on $BASE_URL_GRAPHQL/graphql
+        for i in {1..10}; do
+          curl -sSf http://127.0.0.1:4000/graphql && break
+          echo "Aguardando API GraphQL subir..."
+          sleep 2
+        done
 
     - name: Rodar os testes de API REST via Controller
       run: npm run test-rest-controller
